@@ -6,33 +6,21 @@
  * 
  * 要改变这种模板请点击 工具|选项|代码编写|编辑标准头文件
  */
-using System;
 
-namespace Blank
+
+class Singleton
 {
-	class Program
-	{
-		public static void Main(string[] args)
-		{
-			Console.Write("Press any key to continue . . . ");
-			Console.ReadKey(true);
-		}
+	private Singleton(){               //防止其他类创建实例
 	}
-	
-	class Singleton
+	public static Singleton Instance()   //只在调用Instance方式时会创建Singeton实例
 	{
-		private Singleton(){
+		return Nested.instance;
+	}
+
+	class Nested
+	{
+		static Nested(){	
 		}
-		public static Singleton Instance()
-		{
-			return Nested.instance;
-		}
-		
-		class Nested
-		{
-			static Nested(){	
-			}
-			internal static readonly Singleton instance=new Singleton();
-		}
+		internal static readonly Singleton instance=new Singleton();
 	}
 }
